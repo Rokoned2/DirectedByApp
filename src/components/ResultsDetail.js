@@ -4,10 +4,10 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 const ResultsDetail = ({ result }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: result.image_url }} />
-      <Text style={styles.name}>{result.name}</Text>
+      <Image style={styles.image} source={{ uri:`https://image.tmdb.org/t/p/w500/${result.poster_path}`}} />
+      <Text style={styles.name}>{result.title}</Text>
       <Text>
-        {result.rating} Stars, {result.review_count} Reviews
+        {result.vote_average} Stars, {result.review_count} Reviews
       </Text>
     </View>
   );
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   image: {
-    width: 250,
-    height: 120,
+    width: 200,
+    height: 250,
     borderRadius: 4,
     marginBottom: 5
   },
