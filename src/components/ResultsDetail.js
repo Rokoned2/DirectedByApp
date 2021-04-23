@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 const ResultsDetail = ({ result }) => {
+  console.log("ResultsDetail ", result )
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri:`https://image.tmdb.org/t/p/w500/${result.poster_path}`}} />
@@ -15,7 +16,9 @@ const ResultsDetail = ({ result }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 15
+    marginLeft: 15,
+    flex: 1,
+    backgroundColor: "blue"
   },
   image: {
     width: 200,

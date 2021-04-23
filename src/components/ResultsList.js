@@ -10,9 +10,12 @@ import { withNavigation } from '@react-navigation/compat';
 import ResultsDetail from './ResultsDetail';
 
 const ResultsList = ({ title, results, navigation }) => {
+
+  console.log("results ", results )
   if (!results.length) {
     return null;
   }
+  const movieIds = results.map(movie => movie.id)
 
   return (
     <View style={styles.container}>
@@ -26,7 +29,7 @@ const ResultsList = ({ title, results, navigation }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('ResultsShow', { id: item.id })
+                navigation.navigate('ResultsShow', { id: item.id, movieIds: movieIds, results: results })
               }
             >
               <ResultsDetail result={item} />
@@ -46,7 +49,9 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   container: {
-    marginBottom: 10
+    marginBottom: 10,
+    backgroundColor: "red"
+
   }
 });
 

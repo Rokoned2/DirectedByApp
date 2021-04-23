@@ -9,15 +9,44 @@ const SearchScreen = () => {
   const [searchApi, results, errorMessage] = useResults();
 
 
-console.log("results", results)
   const filterResultsByYear = year => {
     return results.filter(result => {
-      // console.log("result ",result.release_date.includes(`${year}`))
       if(result.release_date.includes(`${year}`)){
        return result;
       }
     });
   };
+
+  const yearSection = () => { 
+    const sortedYears = yearsOrder() 
+    return sortedYears.map((year) => {
+      return(
+          <ResultsList
+            results={filterResultsByYear(year)}
+            title={`${year}`}
+          />
+        )
+      } 
+    ) 
+  }
+
+  const yearsOrder = () => {
+    let years = []
+
+    results.map(result => {
+      const stringYear = result.release_date.slice(0, 4);
+      const year = parseInt(stringYear);
+      years.push(year)
+    })
+
+    let sortedYears = [...new Set(years.sort((a,b) => {
+      if(a > b) return -1;
+      if(a < b) return 1;
+      return 0;
+    }))];
+
+    return sortedYears;  
+  }  
 
   return (
     <>
@@ -29,15 +58,7 @@ console.log("results", results)
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <ScrollView>
-        <ResultsList
-          results={filterResultsByYear('2020')}
-          title="2020"
-        />
-        <ResultsList results={filterResultsByYear('2019')} title="Bit Pricier" />
-        <ResultsList
-          results={filterResultsByYear('2010')}
-          title="2010"
-        />
+      {yearSection()}
       </ScrollView>
     </>
   );

@@ -12,10 +12,15 @@ const Stack = createStackNavigator();
 const App = () => { 
   return(
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator 
+      screenOptions={{
+      }}>
         <Stack.Screen
           name="Search"
           component={SearchScreen}
+          options={{
+           headerShown: false
+         }}
         />
       <Stack.Screen
           name="ResultsShow"
