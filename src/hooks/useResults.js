@@ -14,13 +14,12 @@ export default () => {
           query: searchTerm,
         }
       });
-      // console.log("director ", director.data.results[0].id )
       setDirectorID(director.data.results[0].id);
 
       const directorCredits = await tmdb.get(`person/${directorID}/movie_credits`, {
         params: {
           api_key: "d123ec1dfc61dd7ae05d4b0d2fc4d345",
-          language: 'es-MX'
+          language: 'es-ES'
         }
       })
       const directedMovies = directorCredits.data.crew.filter(content => content.job === "Director")   

@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 const ResultsDetail = ({ result }) => {
-  console.log("ResultsDetail ", result )
   return (
+    <>  
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri:`https://image.tmdb.org/t/p/w500/${result.poster_path}`}} />
       <Text style={styles.name}>{result.title}</Text>
@@ -11,14 +11,13 @@ const ResultsDetail = ({ result }) => {
         {result.vote_average} Stars, {result.review_count} Reviews
       </Text>
     </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     marginLeft: 15,
-    flex: 1,
-    backgroundColor: "blue"
   },
   image: {
     width: 200,

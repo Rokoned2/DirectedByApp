@@ -50,6 +50,7 @@ const SearchScreen = () => {
 
   return (
     <>
+      <StatusBar style="dark" />
       <Text style={styles.title}>Directed by</Text>
       <SearchBar
         term={term}
