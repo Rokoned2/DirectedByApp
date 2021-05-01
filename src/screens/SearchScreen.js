@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SearchScreen = () => {
   const [term, setTerm] = useState('');
@@ -10,6 +11,7 @@ const SearchScreen = () => {
 
 
   const filterResultsByYear = year => {
+
     return results.filter(result => {
       if(result.release_date.includes(`${year}`)){
        return result;
@@ -20,6 +22,7 @@ const SearchScreen = () => {
   const yearSection = () => { 
     const sortedYears = yearsOrder() 
     return sortedYears.map((year) => {
+      // console.log(`result ${year}`,filterResultsByYear(year))
       return(
           <ResultsList
             results={filterResultsByYear(year)}
@@ -49,8 +52,7 @@ const SearchScreen = () => {
   }  
 
   return (
-    <>
-      <StatusBar style="dark" />
+    <SafeAreaView> 
       <Text style={styles.title}>Directed by</Text>
       <SearchBar
         term={term}
@@ -61,7 +63,7 @@ const SearchScreen = () => {
       <ScrollView>
       {yearSection()}
       </ScrollView>
-    </>
+    </SafeAreaView> 
   );
 };
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import {TouchableOpacity, Pressable, View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import tmdb from '../api/tmdb';
 import ResultsList from '../components/ResultsList';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const ResultsShowScreen = ({ navigation, route }) => {
@@ -33,22 +34,49 @@ const ResultsShowScreen = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView >
+      <ScrollView>
+{/*      <Pressable
+        onPress={() => {
+          navigation.navigate("Search")
+        }}
+        style={{
+           marginTop: 10,
+           marginLeft: 10,
+           backgroundColor: "blue",
+           flex: 1,
+        }}
+      > 
+        <Ionicons name="arrow-back-outline" size={32} color="black"  
+        style={{
+           flex: 1,
+           backgroundColor: "red",
+           alignSelf: "flex-start",
+        }}
+        />
+      </Pressable>
+*/}      
       <Text style={styles.title}>
-       {result.title}SDADADS
+       {result.title}
       </Text>
       <View style={styles.row}>
+      {result.poster_path ? (
         <Image 
           style={styles.image} 
           source={{ uri:`https://image.tmdb.org/t/p/w500/${result.poster_path}`}} 
-        />
+        />) : (
+          <View style={styles.imagePlaceholder}>
+           <Text style={styles.mockText}>IMAGEN</Text>
+           <Text style={styles.mockText}>NO DISPONIBLE</Text>
+          </View>
+        )
+        }
         <View style={styles.rightCol}>
           <Text style={styles.sinopsisTitle}>SINOPSIS</Text>
           <Text>{result.overview}</Text>
         </View>
       </View>
         <ResultsList 
-          results={results}
+          results={results.filter((result) => id !== result.id)}
           title={resultListTitle}
         />        
       </ScrollView>
@@ -60,6 +88,13 @@ const styles = StyleSheet.create({
   image: {
     width: 160,
     height: 250
+  },
+  imagePlaceholder: {
+    width: 160,
+    height: 250,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "gray"
   },
   row: {
     flexDirection: "row",
@@ -80,6 +115,10 @@ const styles = StyleSheet.create({
    rightCol: {
     paddingLeft: 5,
     flex: 1
+   },
+   mockText: {
+    color: "black",
+    fontWeight: "bold"
    }
 });
 

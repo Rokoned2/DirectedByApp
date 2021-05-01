@@ -23,14 +23,15 @@ const ResultsList = ({ title, results, navigation }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         data={results}
-        keyExtractor={result => result.id}
+        keyExtractor={result => {
+          // console.log("result ", result.id, result.title )
+          result.id}}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
               onPress={() =>{
                   // navigation.navigate('ResultsShow', { id: item.id, movieIds: movieIds, results: results })
-                  console.log("press")
-                  navigation.replace('ResultsShow', { id: item.id, movieIds: movieIds, results: results })
+                  navigation.push('ResultsShow', { id: item.id, movieIds: movieIds, results: results })
                 }
               }
             >
